@@ -30,6 +30,9 @@ class Challenge():
         return "rated" in supported if self.rated else "casual" in supported
 
     def is_supported(self, config):
+        blacklist = config["blacklist"]
+        if self.challenger_name in blacklist:
+            return False
         if not config.get("accept_bot", False) and self.challenger_is_bot:
             return False
         variants = config["variants"]

@@ -37,6 +37,9 @@ class Challenge():
         inc_max = config.get("max_increment", 180)
         inc_min = config.get("min_increment", 0)
         modes = config["modes"]
+        if not config.get("accept_bot_rated", False) and self.challenger_is_bot:
+            if "rated" in modes:
+                modes.remove("rated")
         return self.is_supported_time_control(tc, inc_max, inc_min) and self.is_supported_variant(variants) and self.is_supported_mode(modes)
 
     def score(self):

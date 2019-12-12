@@ -29,7 +29,7 @@ try:
 except ImportError:
     from http.client import BadStatusLine as RemoteDisconnected
 
-__version__ = "1.1.4"
+__version__ = "1.1.4.2"
 
 terminated = False
 
@@ -147,6 +147,7 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
             play_first_move(game, engine, board, li)
 
         li.chat(game.id, "player", "{} (lichess-bot v{})".format(engine.name(), __version__))
+        li.chat(game.id, "spectator", "{} (lichess-bot v{})".format(engine.name(), __version__))
         engine.set_time_control(game)
 
         for binary_chunk in lines:

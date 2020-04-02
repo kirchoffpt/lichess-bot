@@ -3,3 +3,5 @@ __pycache__
 /engines/*
 !/engines/README.md
 .venv
+*.lnk
+uci_input_log.txt

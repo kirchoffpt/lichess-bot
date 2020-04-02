@@ -39,7 +39,7 @@ class Challenge():
         tc = config["time_controls"]
         inc_max = config.get("max_increment", 180)
         inc_min = config.get("min_increment", 0)
-        modes = config["modes"]
+        modes = config["modes"].copy()
         if not config.get("accept_bot_rated", False) and self.challenger_is_bot:
             if "rated" in modes:
                 modes.remove("rated")

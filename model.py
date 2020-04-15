@@ -4,6 +4,7 @@ from urllib.parse import urljoin
 
 class Challenge():
     def __init__(self, c_info):
+        print(c_info)
         self.id = c_info["id"]
         self.rated = c_info["rated"]
         self.variant = c_info["variant"]["key"]
@@ -11,12 +12,14 @@ class Challenge():
         self.speed = c_info["speed"]
         self.increment = c_info.get("timeControl", {}).get("increment", -1)
         self.challenger = c_info.get("challenger")
+        self.destUser = c_info.get("destUser")
         self.challenger_title = self.challenger.get("title") if self.challenger else None
         self.challenger_is_bot = self.challenger_title == "BOT"
         self.challenger_master_title = self.challenger_title if not self.challenger_is_bot else None
         self.challenger_name = self.challenger["name"] if self.challenger else "Anonymous"
         self.challenger_rating_int = self.challenger["rating"] if self.challenger else 0
         self.challenger_rating = self.challenger_rating_int or "?"
+        self.challenger_provisional = self.challenger["provisional"] or False 
 
     def is_supported_variant(self, supported):
         return self.variant in supported
@@ -31,6 +34,7 @@ class Challenge():
 
     def is_supported(self, config):
         blacklist = config["blacklist"]
+        print(self.challenger)
         if self.challenger_name in blacklist:
             return False
         if not config.get("accept_bot", False) and self.challenger_is_bot:
@@ -40,7 +44,7 @@ class Challenge():
         inc_max = config.get("max_increment", 180)
         inc_min = config.get("min_increment", 0)
         modes = config["modes"].copy()
-        if not config.get("accept_bot_rated", False) and self.challenger_is_bot:
+        if (not config.get("accept_bot_rated", False) and self.challenger_is_bot) or self.challenger_provisional:
             if "rated" in modes:
                 modes.remove("rated")
         return self.is_supported_time_control(tc, inc_max, inc_min) and self.is_supported_variant(variants) and self.is_supported_mode(modes)

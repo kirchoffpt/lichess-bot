@@ -34,7 +34,6 @@ class Challenge():
 
     def is_supported(self, config):
         blacklist = config["blacklist"]
-        print(self.challenger)
         if self.challenger_name in blacklist:
             return False
         if not config.get("accept_bot", False) and self.challenger_is_bot:

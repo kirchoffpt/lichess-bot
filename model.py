@@ -19,7 +19,7 @@ class Challenge():
         self.challenger_name = self.challenger["name"] if self.challenger else "Anonymous"
         self.challenger_rating_int = self.challenger["rating"] if self.challenger else 0
         self.challenger_rating = self.challenger_rating_int or "?"
-        self.challenger_provisional = self.challenger["provisional"] or False 
+        self.challenger_provisional = self.challenger.get("provisional") or False 
 
     def is_supported_variant(self, supported):
         return self.variant in supported

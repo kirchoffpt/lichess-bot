@@ -50,6 +50,7 @@ challenge:                   # incoming challenges
   sort_by: "best"            # possible values: "best", "first"
   accept_bot: false          # accepts challenges coming from other bots
   accept_bot_rated : false	 # declines rated bot games
+  casual_correspondence : true		#if correspondence is available only allow casual games 
   max_increment: 180         # maximum amount of increment to accaept a challenge. the max is 180. set to 0 for no increment
   min_increment: 0           # minimum amount of increment to accept a challenge
   variants:                  # chess variants to accept (http://lichess.org/variant)

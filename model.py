@@ -44,7 +44,7 @@ class Challenge():
         inc_min = config.get("min_increment", 0)
         modes = config["modes"].copy()
         casual_flags = []
-        casual_flags.append( config.get("casual_correspondence", True) )
+        casual_flags.append( config.get("casual_correspondence", True) and self.speed == "correspondence")
         casual_flags.append( not config.get("accept_bot_rated", False) and self.challenger_is_bot )
         casual_flags.append( self.challenger_provisional )
         if any(casual_flags):
